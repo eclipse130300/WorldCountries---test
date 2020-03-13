@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 public class ListManager : MonoBehaviour
 {
+    public GameObject listInfoPanel;
     public GameObject listPanel;
+
     public Text listInfoText;
     public List<City> pickedCities = new List<City>();
     string resultString;
+
+    public bool inListMenu;
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,12 +24,12 @@ public class ListManager : MonoBehaviour
     {
         if (pickedCities.Count >= 1)
         {
-            listPanel.SetActive(true);
+            listInfoPanel.SetActive(true);
             UpdateListInfo();
         }
         else
         {
-            listPanel.SetActive(false);
+            listInfoPanel.SetActive(false);
         }
 
     }
@@ -45,7 +49,8 @@ public class ListManager : MonoBehaviour
     }
     public void ShowList()
     {
-
+        inListMenu = true;
+        listPanel.SetActive(true);
     }
     public void ClearList()
     {
@@ -77,5 +82,10 @@ public class ListManager : MonoBehaviour
             resultString = " СТРАН";
         }
         return resultString;
+    }
+    public void BackToMap()
+    {
+        listPanel.SetActive(false);
+        inListMenu = false;
     }
 }
