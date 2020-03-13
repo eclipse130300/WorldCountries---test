@@ -5,16 +5,12 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private Camera _camera;
     public float movementSpeed;
     Vector3 firstTouchPos;
-    Vector3 moveDirection;
     Rigidbody rb;
-    [SerializeField] float slowDownSpeed;
 
     private void Awake()
     {
-        _camera = GetComponent<Camera>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -34,7 +30,6 @@ public class CameraController : MonoBehaviour
                 Vector3 swipeVector = movedTouchPos - firstTouchPos;
                 Vector3 rbForce = swipeVector * movementSpeed * Time.deltaTime;
                 rb.AddForce(rbForce, ForceMode.Force);
-                print(rbForce);
             }
             else if (touch.phase == TouchPhase.Stationary)
             {
@@ -42,30 +37,4 @@ public class CameraController : MonoBehaviour
             }
             }
     }
-
-        //Vector2 mousePos = Input.mousePosition;
-
-        //if(Input.GetMouseButtonDown(0))
-        //{
-        //    Ray ray = _camera.ScreenPointToRay(mousePos);
-        //    RaycastHit hit;
-        //    if (Physics.Raycast(ray, out hit))
-        //    {
-        //        mapClickPoint = new Vector3(hit.point.x, 0, hit.point.z);
-        //    }
-        //}
-        //if(Input.GetMouseButton(0))
-        //{
-        //    Ray ray2 = _camera.ScreenPointToRay(mousePos);
-        //    RaycastHit hit;
-        //    if (Physics.Raycast(ray2, out hit))
-        //    {
-        //        Vector3 mapHoverPoint = new Vector3(hit.point.x, 0, hit.point.z);
-        //        moveDirection = (mapClickPoint - mapHoverPoint).normalized;
-        //        if (Vector3.Distance(mapClickPoint, mapHoverPoint) >= 0.1f)
-        //        {
-        //            transform.position += moveDirection * movementSpeed * Time.deltaTime;
-        //        }
-        //    }
-        //}
-    }
+}

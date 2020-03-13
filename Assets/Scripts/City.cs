@@ -14,31 +14,30 @@ public class City : MonoBehaviour
     public Text populationText;
 
     public GameObject cityInfoPanel;
-    [SerializeField]static float dragCounter;
+    SpriteRenderer spriteRenderer;
+    GameObject sightToApear;
 
     public Sprite gpsSprite;
     public Sprite checkMarkSprite;
     public ListManager listManager;
-    SpriteRenderer spriteRenderer;
-    GameObject sightToApear;
+
+    static float sightOffset = 0.15f; // offset of each sightPoint
+    static float dragCounter = 1.5f;  // sets the amount of secounds you have to click and hover over the city to add it to a list
 
     float dragTimer;
-    bool isChecked;
+    bool isChecked = false;
     private void Awake()
     {
-        dragCounter = 1.5f; // sets the amount of secounds you have to click and hover over the city to add it to a list
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = gpsSprite;
+
         SetDragTimer();
     }
-    private void Update()
-    {
 
-    }
     private void OnMouseOver()
     {
         ShowCityName();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0 && !isChecked)
         {
             DisplayInfo();
         }
@@ -51,8 +50,7 @@ public class City : MonoBehaviour
         GDPText.text = "ВВП: " + cityData.GDP.ToString() + " млрд USD";
         populationText.text = "Население: " + cityData.population.ToString();
 
-        Vector3 offset = new Vector3(-0.15f, 0, -0.15f);
-        sightToApear = Instantiate(cityData.sight, transform.position + offset, Quaternion.identity);
+        ShowSight();
     }
     private void OnMouseDrag()
     {
@@ -65,9 +63,11 @@ public class City : MonoBehaviour
             {
                 case true:
                     ClearMark();
+                    DeleteCityFromList();
                     break;
                 case false:
                     MarkOut();
+                    AddCityToList();
                     break;
             }       
         }
@@ -77,39 +77,57 @@ public class City : MonoBehaviour
         cityInfoPanel.SetActive(false);
         cityNameText.gameObject.SetActive(false);
         SetDragTimer();
-        Destroy(sightToApear);
+        if (sightToApear != null)
+        {
+            Destroy(sightToApear);
+        }
     }
     private void ShowCityName()
     {
         cityNameText.text = cityData.cityName;
         cityNameText.gameObject.SetActive(true);
     }
-    void MarkOut()
+    void MarkOut() //галочка появилась
     {
         isChecked = true;
-        print("Picked");
+        cityInfoPanel.SetActive(false);
         spriteRenderer.sprite = checkMarkSprite;
+    }
+
+    private void AddCityToList()
+    {
         if (!listManager.GetCityList().Contains(this))
         {
             listManager.AddToList(this);
         }
     }
-    void ClearMark()
+
+    public void ClearMark()  // вместо галочки снова GPS
     {
         isChecked = false;
-        print("Removed");
         spriteRenderer.sprite = gpsSprite;
+    }
+
+    private void DeleteCityFromList()
+    {
         if (listManager.GetCityList().Contains(this))
         {
             listManager.RemoveFromList(this);
         }
     }
+
     void SetDragTimer() 
     {
         dragTimer = dragCounter;
     }
     void ShowSight()
     {
-
+        Vector3 offsetDirection = (transform.position - Camera.main.transform.position);
+        offsetDirection.y = 0;
+        Vector3 sightPoint = offsetDirection.normalized * sightOffset;
+        if (sightToApear == null)
+        {
+            sightToApear = Instantiate(cityData.sight, transform.position + sightPoint, cityData.sight.transform.rotation);
+        }
     }
 }
