@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795fda6c1bbf0234c8c85d8b52807cfe, type: 3}
+  m_Name: London
+  m_EditorClassIdentifier: 
+  cityName: London
+  GDP: 879
+  population: 8908081
+  area: 1572
+  sight: {fileID: 2499326080391404169, guid: 1c9dff61a4578744482b66e9a73ad17f, type: 3}

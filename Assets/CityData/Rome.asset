@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795fda6c1bbf0234c8c85d8b52807cfe, type: 3}
+  m_Name: Rome
+  m_EditorClassIdentifier: 
+  cityName: Rome
+  GDP: 166
+  population: 2875805
+  area: 1287
+  sight: {fileID: 8414741342648984054, guid: faf52935473a7664eb94162689e53da0, type: 3}
