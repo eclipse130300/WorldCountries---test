@@ -10,7 +10,7 @@ public class City : MonoBehaviour
     //public Text cityNameText;
     public Text cityNameText;
     public Text areaText;
-    public Text GDPText;
+    public Text GRPText;
     public Text populationText;
 
     public GameObject cityInfoPanel;
@@ -47,7 +47,7 @@ public class City : MonoBehaviour
         cityInfoPanel.SetActive(true);
 
         areaText.text = "Площадь: " + cityData.area.ToString() + " киллометров^2";
-        GDPText.text = "ВВП: " + cityData.GDP.ToString() + " млрд USD";
+        GRPText.text = "ВРП: " + cityData.GDP.ToString() + " млрд USD";
         populationText.text = "Население: " + cityData.population.ToString();
 
         ShowSight();

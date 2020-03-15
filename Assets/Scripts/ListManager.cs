@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ListManager : MonoBehaviour
 {
     public GameObject listInfoPanel;
-    public GameObject listPanel;
+    public GameObject listWindow;
 
     public Text listInfoText;
     public List<City> pickedCities = new List<City>();
@@ -50,7 +50,7 @@ public class ListManager : MonoBehaviour
     public void ShowList()
     {
         inListMenu = true;
-        listPanel.SetActive(true);
+        listWindow.SetActive(true);
     }
     public void ClearList()
     {
@@ -85,7 +85,21 @@ public class ListManager : MonoBehaviour
     }
     public void BackToMap()
     {
-        listPanel.SetActive(false);
+        listWindow.SetActive(false);
         inListMenu = false;
     }
 }
+public class SortByName: IComparer<City>
+{
+    public int Compare(City city1, City city2)
+    {
+        return city1.cityNameText.text.CompareTo(city2.cityNameText.text);
+    }
+}
+//public class SortByArea: IComparer<City>
+//{
+//    public int Compare(City city1, City city2)
+//    {
+//        return City.
+//    }
+//}
