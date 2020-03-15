@@ -15,7 +15,7 @@ public class ListManager : MonoBehaviour
 
     public bool inListMenu;
     private City[] allCities;
-
+    private List<GameObject> lineList = new List<GameObject>();
     void Awake()
     {
         allCities = FindObjectsOfType<City>();
@@ -90,6 +90,11 @@ public class ListManager : MonoBehaviour
     {
         listWindow.SetActive(false);
         inListMenu = false;
+        foreach (GameObject line in lineList)
+        {
+            Destroy(line);
+        }
+        lineList.Clear();
     }
     void DisplayList()
     {
@@ -98,6 +103,7 @@ public class ListManager : MonoBehaviour
            GameObject line = Instantiate(listLineTemplate);
             line.SetActive(true);
             line.transform.SetParent(listLineTemplate.transform.parent, false);
+            lineList.Add(line);
         }
     }
     // SORTING METHODS AND INTERFACE IMPLEMENTATIONS
