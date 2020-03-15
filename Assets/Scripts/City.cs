@@ -96,9 +96,9 @@ public class City : MonoBehaviour
 
     private void AddCityToList()
     {
-        if (!listManager.GetCityList().Contains(this))
+        if (!listManager.GetCityList().Contains(cityData))
         {
-            listManager.AddToList(this);
+            listManager.AddToList(cityData);
         }
     }
 
@@ -110,9 +110,9 @@ public class City : MonoBehaviour
 
     private void DeleteCityFromList()
     {
-        if (listManager.GetCityList().Contains(this))
+        if (listManager.GetCityList().Contains(cityData))
         {
-            listManager.RemoveFromList(this);
+            listManager.RemoveFromList(cityData);
         }
     }
 
