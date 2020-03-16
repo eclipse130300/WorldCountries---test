@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Beijing
   m_EditorClassIdentifier: 
   cityName: Beijing
-  GDP: 441
+  GRP: 441
   population: 21705000
   area: 16801
   sight: {fileID: 3919456678227002674, guid: 1a43b029678da1e4c89add77670c9e88, type: 3}

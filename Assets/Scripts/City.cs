@@ -47,7 +47,7 @@ public class City : MonoBehaviour
         cityInfoPanel.SetActive(true);
 
         areaText.text = "Площадь: " + cityData.area.ToString() + " киллометров^2";
-        GRPText.text = "ВРП: " + cityData.GDP.ToString() + " млрд USD";
+        GRPText.text = "ВРП: " + cityData.GRP.ToString() + " млрд USD";
         populationText.text = "Население: " + cityData.population.ToString();
 
         ShowSight();

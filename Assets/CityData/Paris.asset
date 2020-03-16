@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Paris
   m_EditorClassIdentifier: 
   cityName: Paris
-  GDP: 850
+  GRP: 850
   population: 2190327
   area: 105
   sight: {fileID: 1528060758002381586, guid: fc03bdb4ec6bc3b488b04601e2fa190d, type: 3}

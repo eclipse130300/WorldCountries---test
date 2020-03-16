@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New York
   m_EditorClassIdentifier: 
   cityName: New York
-  GDP: 1717
+  GRP: 1717
   population: 8405837
   area: 1214
   sight: {fileID: 2576378472306882381, guid: e4e5623de8192674ba919fb5fd18faee, type: 3}

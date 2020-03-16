@@ -27,7 +27,7 @@ public class ListManager : MonoBehaviour
         if (pickedCities.Count >= 1)
         {
             listInfoPanel.SetActive(true);
-            UpdateListInfo();
+            UpdateMapInfo();
         }
         else
         {
@@ -53,9 +53,10 @@ public class ListManager : MonoBehaviour
     {
         inListMenu = true;
         listWindow.SetActive(true);
+        DefaultSort();
         DisplayList();
     }
-    public void ClearList()
+    public void ClearPickedCities()
     {
         foreach (City city in allCities)
         {
@@ -63,7 +64,7 @@ public class ListManager : MonoBehaviour
         }
         pickedCities.Clear();
     }
-    void UpdateListInfo()
+    void UpdateMapInfo()
     {
         if (pickedCities.Count == 1)
         {
@@ -90,11 +91,24 @@ public class ListManager : MonoBehaviour
     {
         listWindow.SetActive(false);
         inListMenu = false;
-        foreach (GameObject line in lineList)
+        ClearListMenu();
+    }
+
+    private void ClearListMenu()
+    {
+        if (lineList.Count >= 1)
         {
-            Destroy(line);
+            foreach (GameObject line in lineList)
+            {
+                Destroy(line);
+            }
+            lineList.Clear();
         }
-        lineList.Clear();
+    }
+    public void UpdateListMenu()
+    {
+        ClearListMenu();
+        DisplayList();
     }
     void DisplayList()
     {
@@ -103,6 +117,11 @@ public class ListManager : MonoBehaviour
            GameObject line = Instantiate(listLineTemplate);
             line.SetActive(true);
             line.transform.SetParent(listLineTemplate.transform.parent, false);
+            LineTemplateScript lineScript = line.GetComponent<LineTemplateScript>();
+            lineScript.lineTextCityName.text = pickedCities[i - 1].cityName;
+            lineScript.lineTextArea.text = pickedCities[i - 1].area.ToString();
+            lineScript.lineTextPopulation.text = pickedCities[i - 1].population.ToString();
+            lineScript.lineTextGRP.text = pickedCities[i - 1].GRP.ToString();
             lineList.Add(line);
         }
     }
@@ -154,6 +173,6 @@ public class SortByGRP : IComparer<CityData>
 {
     public int Compare(CityData cityD1, CityData cityD2)
     {
-        return cityD1.GDP.CompareTo(cityD2.GDP);
+        return cityD1.GRP.CompareTo(cityD2.GRP);
     }
 }

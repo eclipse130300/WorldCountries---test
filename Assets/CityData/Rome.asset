@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rome
   m_EditorClassIdentifier: 
   cityName: Rome
-  GDP: 166
+  GRP: 166
   population: 2875805
   area: 1287
   sight: {fileID: 8414741342648984054, guid: faf52935473a7664eb94162689e53da0, type: 3}

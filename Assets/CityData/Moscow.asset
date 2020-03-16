@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Moscow
   m_EditorClassIdentifier: 
   cityName: Moscow
-  GDP: 213
+  GRP: 213
   population: 12692466
   area: 2561
   sight: {fileID: 323001113674046394, guid: f3cce8fd83ea04548838c30ad5a35fec, type: 3}

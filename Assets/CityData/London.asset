@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: London
   m_EditorClassIdentifier: 
   cityName: London
-  GDP: 879
+  GRP: 879
   population: 8908081
   area: 1572
   sight: {fileID: 2499326080391404169, guid: 1c9dff61a4578744482b66e9a73ad17f, type: 3}

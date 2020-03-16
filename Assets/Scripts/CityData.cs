@@ -5,7 +5,7 @@ using UnityEngine;
 public class CityData : ScriptableObject
 {
     public string cityName;
-    public int GDP;
+    public int GRP;
     public int population;
     public int area;
     public GameObject sight;
