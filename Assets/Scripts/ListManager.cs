@@ -33,22 +33,8 @@ public class ListManager : MonoBehaviour
         {
             listInfoPanel.SetActive(false);
         }
-
     }
 
-   public void AddToList(CityData item)
-    {
-        pickedCities.Add(item);
-    }
-
-    public void RemoveFromList(CityData item)
-    {
-        pickedCities.Remove(item);
-    }
-    public List<CityData> GetCityList()
-    {
-        return pickedCities;
-    }
     public void ShowListMenu()
     {
         inListMenu = true;
@@ -94,7 +80,7 @@ public class ListManager : MonoBehaviour
         ClearListMenu();
     }
 
-    private void ClearListMenu()
+    public void ClearListMenu()
     {
         if (lineList.Count >= 1)
         {
@@ -110,7 +96,13 @@ public class ListManager : MonoBehaviour
         ClearListMenu();
         DisplayList();
     }
-    void DisplayList()
+    public void ReverseList()
+    {
+        ClearListMenu();
+        pickedCities.Reverse();
+        DisplayList();
+    }
+    public void DisplayList()
     {
         for (int i=1; i <= pickedCities.Count; i++)
         {

@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-
     void LateUpdate()
     {
         if (!listManager.inListMenu) //check if listPanel isn't activated

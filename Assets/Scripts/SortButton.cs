@@ -2,16 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SortButton : MonoBehaviour
+public class SortButton : MonoBehaviour, IPointerDownHandler
 {
-    public ListManager listManager;
-    private bool isClicked;
+    public ListManager lm;
+    public RectTransform arrowImage;
+    float arrowRotationAngle = 180f;
+    public enum ButtonKind { area, population, GRP }
+    public ButtonKind button;
+    int clickCount;
 
-
-    private void OnMouseDown()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        isClicked = true;
-        print("OKOKOK");
+        clickCount++;
+        Vector3 rotationAngle = new Vector3(0, 0, arrowRotationAngle);
+        arrowImage.Rotate(rotationAngle);
+        if (clickCount != 0 && clickCount % 2 == 0) //use bool?
+        {
+            lm.ReverseList();
+        }
+        else
+        {
+            switch (button)
+            {
+                case ButtonKind.area:
+                    lm.AreaSort();
+                    break;
+                case ButtonKind.population:
+                    lm.PopulationSort();
+                    break;
+                case ButtonKind.GRP:
+                    lm.GRPSort();
+                    break;
+            }
+            lm.UpdateListMenu();
+        }
     }
 }
