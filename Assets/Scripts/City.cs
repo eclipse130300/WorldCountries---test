@@ -13,7 +13,7 @@ public class City : MonoBehaviour
     public Text GRPText;
     public Text populationText;
 
-    public GameObject cityInfoPanel;
+    public Animator cityInfo_Anim;
     SpriteRenderer spriteRenderer;
     GameObject sightToApear;
 
@@ -44,7 +44,7 @@ public class City : MonoBehaviour
     }
     void DisplayInfo()
     {
-        cityInfoPanel.SetActive(true);
+        cityInfo_Anim.SetBool("InfoIsON", true);
 
         areaText.text = "Площадь: " + cityData.area.ToString() + " киллометров^2";
         GRPText.text = "ВРП: " + cityData.GRP.ToString() + " млрд USD";
@@ -74,7 +74,7 @@ public class City : MonoBehaviour
     }
     private void OnMouseExit()
     {
-        cityInfoPanel.SetActive(false);
+        cityInfo_Anim.SetBool("InfoIsON", false);
         cityNameText.gameObject.SetActive(false);
         SetDragTimer();
         if (sightToApear != null)
@@ -89,8 +89,8 @@ public class City : MonoBehaviour
     }
     void MarkOut() //галочка появилась
     {
+        cityInfo_Anim.SetBool("InfoIsON", false);
         isChecked = true;
-        cityInfoPanel.SetActive(false);
         spriteRenderer.sprite = checkMarkSprite;
     }
 

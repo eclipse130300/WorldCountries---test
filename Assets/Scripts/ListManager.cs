@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ListManager : MonoBehaviour
 {
-    public GameObject listInfoPanel;
+    public Animator pickedC_Anim;
     public GameObject listWindow;
     public GameObject listLineTemplate;
 
@@ -26,12 +26,12 @@ public class ListManager : MonoBehaviour
     {
         if (pickedCities.Count >= 1)
         {
-            listInfoPanel.SetActive(true);
+            pickedC_Anim.SetBool("pickedISON", true);
             UpdateMapInfo();
         }
         else
         {
-            listInfoPanel.SetActive(false);
+            pickedC_Anim.SetBool("pickedISON", false);
         }
     }
 
@@ -54,22 +54,22 @@ public class ListManager : MonoBehaviour
     {
         if (pickedCities.Count == 1)
         {
-            listInfoText.text = "ВЫБРАНА " + pickedCities.Count + " СТРАНА";
+            listInfoText.text = "ВЫБРАН " + pickedCities.Count + " ГОРОД";
         }
         else
         {
-            listInfoText.text = "ВЫБРАНО " + pickedCities.Count + NormalInfoString();
+            listInfoText.text = "ВЫБРАНЫ " + pickedCities.Count + NormalInfoString();
         }
     }
      private string NormalInfoString()
     {
        if(pickedCities.Count >= 2 || pickedCities.Count <= 4)
         {
-            resultString = " СТРАНЫ";
+            resultString = " ГОРОДА";
         }
        if (pickedCities.Count >= 5)
         {
-            resultString = " СТРАН";
+            resultString = " ГОРОДОВ";
         }
         return resultString;
     }
@@ -110,10 +110,12 @@ public class ListManager : MonoBehaviour
             line.SetActive(true);
             line.transform.SetParent(listLineTemplate.transform.parent, false);
             LineTemplateScript lineScript = line.GetComponent<LineTemplateScript>();
+
             lineScript.lineTextCityName.text = pickedCities[i - 1].cityName;
             lineScript.lineTextArea.text = pickedCities[i - 1].area.ToString();
             lineScript.lineTextPopulation.text = pickedCities[i - 1].population.ToString();
             lineScript.lineTextGRP.text = pickedCities[i - 1].GRP.ToString();
+
             lineList.Add(line);
         }
     }

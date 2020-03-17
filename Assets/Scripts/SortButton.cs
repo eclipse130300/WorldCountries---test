@@ -18,6 +18,7 @@ public class SortButton : MonoBehaviour, IPointerDownHandler
         clickCount++;
         Vector3 rotationAngle = new Vector3(0, 0, arrowRotationAngle);
         arrowImage.Rotate(rotationAngle);
+
         if (clickCount != 0 && clickCount % 2 == 0) //use bool?
         {
             lm.ReverseList();
