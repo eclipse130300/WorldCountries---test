@@ -61,13 +61,13 @@ public class ListManager : MonoBehaviour
             listInfoText.text = "ВЫБРАНЫ " + pickedCities.Count + NormalInfoString();
         }
     }
-     private string NormalInfoString()
+    private string NormalInfoString()
     {
-       if(pickedCities.Count >= 2 || pickedCities.Count <= 4)
+        if (pickedCities.Count >= 2 || pickedCities.Count <= 4)
         {
             resultString = " ГОРОДА";
         }
-       if (pickedCities.Count >= 5)
+        if (pickedCities.Count >= 5)
         {
             resultString = " ГОРОДОВ";
         }

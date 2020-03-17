@@ -36,60 +36,56 @@ public class CameraController : MonoBehaviour
     {
         if (!listManager.inListMenu) 
         {
-                if (Input.touchCount == 1 && state == MoveState.horizontal)
-                {
-                heightRatio = transform.position.y/maxYpos;
+            if (Input.touchCount == 1 && state == MoveState.horizontal) //horizontal
+            {
+                heightRatio = transform.position.y / maxYpos;
                 Touch touch = Input.GetTouch(0);
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        firstTouchPos = new Vector3(touch.position.x, 0, touch.position.y);
-                    }
-                    else if (touch.phase == TouchPhase.Ended)
-                    {
-                        movedTouchPos = new Vector3(touch.position.x, 0, touch.position.y);
-                        Vector3 swipeVector = movedTouchPos - firstTouchPos;
-                        Vector3 horizontalForce = swipeVector * movementSpeed * heightRatio * Time.deltaTime;
-                        rb.AddForce(horizontalForce, ForceMode.Force);
-                    }
-                    else if (touch.phase == TouchPhase.Stationary)
-                    {
-                        rb.velocity = Vector3.zero;
-                    }
-                }
-                else if(Input.touchCount == 2)
+                if (touch.phase == TouchPhase.Began)
                 {
+                    firstTouchPos = new Vector3(touch.position.x, 0, touch.position.y);
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    movedTouchPos = new Vector3(touch.position.x, 0, touch.position.y);
+                    Vector3 swipeVector = movedTouchPos - firstTouchPos;
+                    Vector3 horizontalForce = swipeVector * movementSpeed * heightRatio * Time.deltaTime;
+                    rb.AddForce(horizontalForce, ForceMode.Force);
+                }
+                else if (touch.phase == TouchPhase.Stationary)
+                {
+                    rb.velocity = Vector3.zero;
+                }
+            }
+            else if (Input.touchCount == 2)  //zoom
+            {
                 state = MoveState.zooming;
                 Touch touch1 = Input.GetTouch(0);
                 Touch touch2 = Input.GetTouch(1);
-                Vector2 middlePoint = (touch1.position - touch2.position) / 2;
                 float magnBetweenTouches = (touch1.position - touch2.position).magnitude;
-                if(touch1.phase == TouchPhase.Began && touch2.phase == TouchPhase.Began)
+                if (touch1.phase == TouchPhase.Began && touch2.phase == TouchPhase.Began)
                 {
                     startTSMagnitude = magnBetweenTouches;
                 }
                 if (touch1.phase == TouchPhase.Ended || touch2.phase == TouchPhase.Ended)
                 {
                     float finishedMagnitude = magnBetweenTouches;
-                    Ray ray = Camera.main.ScreenPointToRay(middlePoint);
-                    RaycastHit hit;
-                    if(Physics.Raycast(ray, out hit))
                     {
-                    Vector3 zoomForce = (transform.position - hit.point).normalized * zoomFactor * Time.deltaTime;
+                        Vector3 zoomForce = transform.forward * zoomFactor * Time.deltaTime;
                         if (finishedMagnitude > startTSMagnitude)
                         {
                             // move closer
-                            rb.AddForce(-zoomForce, ForceMode.Force);
+                            rb.AddForce(zoomForce, ForceMode.Force);
                         }
                         else
                         {
                             // move further
-                            rb.AddForce(zoomForce, ForceMode.Force);                       
+                            rb.AddForce(-zoomForce, ForceMode.Force);
                         }
                         StartCoroutine(BlockRandomInput());
                     }
                 }
 
-                }
+            }
                 //Clamp Box over the map
             transform.position = new Vector3(
                 Mathf.Clamp(transform.position.x, -xClamped, xClamped),
